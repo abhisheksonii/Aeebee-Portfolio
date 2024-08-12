@@ -27,46 +27,45 @@ const projects: Project[] = [
     image: "/Avatar.png",
     liveLink: "https://your-dashboard-url.com"
   }
-  // Add more projects as needed
 ];
 
 export default function Projects() {
   return (
-    <section className="py-20">
-      <h2 className="text-3xl font-bold mb-10 text-center text-green-400">Projects</h2>
-      <div className="flex flex-wrap justify-center gap-8">
+    <section className="py-10 sm:py-20">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-10 text-center text-green-400">Projects</h2>
+      <div className="flex flex-wrap justify-center gap-6 sm:gap-8 px-4 sm:px-0">
         {projects.map((project, index) => (
-          <CardContainer key={index} className="w-full max-w-md">
+          <CardContainer key={index} className="w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)]">
             <CardBody className={cn(
-              "bg-zinc-900/50 backdrop-blur-md relative group/card",
-              "dark:hover:shadow-2xl dark:hover:shadow-green-500/[0.1]",
-              "dark:bg-black/50 dark:border-white/[0.2] border-black/[0.1]",
-              "w-full h-auto rounded-xl p-6 border",
+              "bg-gray-900/90 backdrop-blur-sm relative group/card",
+              "hover:shadow-2xl hover:shadow-green-500/[0.1]",
+              "border-white/[0.2] border",
+              "w-full h-auto rounded-xl p-4 sm:p-6",
               "transition-all duration-300"
             )}>
               <CardItem
                 translateZ="50"
-                className="text-xl font-bold text-green-500 mb-2"
+                className="text-xl sm:text-2xl font-bold text-green-400 mb-2"
               >
                 {project.name}
               </CardItem>
               <CardItem
                 as="p"
                 translateZ="60"
-                className="text-green-100 text-sm mb-4"
+                className="text-sm sm:text-base text-green-200 mb-4"
               >
                 {project.description}
               </CardItem>
               <CardItem
                 translateZ="100"
-                className="w-full mb-4"
+                className="w-full h-32 sm:h-48 relative rounded-lg overflow-hidden mb-4"
               >
                 <Image
                   src={project.image}
                   alt={`${project.name} preview`}
-                  width={400}
-                  height={200}
-                  className="h-40 w-full object-cover rounded-xl group-hover/card:shadow-xl"
+                  layout="fill"
+                  objectFit="cover"
+                  className="group-hover/card:shadow-xl transition-all duration-300"
                 />
               </CardItem>
               <CardItem
