@@ -6,8 +6,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Hacker Portfolio',
-  description: 'A personal portfolio website with a hacker theme',
+  title: "Abhishek's Portfolio",
+  description: 'Python Artisan, Client Handling and ML Developer',
 }
 
 export default function RootLayout({
@@ -16,10 +16,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-black text-green-500 font-mono`}>
+    <html lang="en" className="h-full">
+      <body className={`${inter.className} flex flex-col min-h-screen bg-black text-green-500 font-mono`}>
         <Header />
-        {children}
+        <main className="flex-grow">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>
