@@ -114,7 +114,7 @@ type CardItemProps<T extends React.ElementType> = {
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
-} & Omit<React.ComponentPropsWithoutRef<T>, 'className' | 'children'>;
+} & Omit<React.ComponentPropsWithoutRef<T>, "as" | "children" | "className" | "translateX" | "translateY" | "translateZ" | "rotateX" | "rotateY" | "rotateZ">;
 
 export const CardItem = <T extends React.ElementType = "div">({
   as,
@@ -128,23 +128,22 @@ export const CardItem = <T extends React.ElementType = "div">({
   rotateZ = 0,
   ...rest
 }: CardItemProps<T>) => {
-  const ref = useRef<HTMLElement>(null);
+  const Component = as || "div";
+  const ref = useRef<React.ElementRef<typeof Component>>(null);
   const [isMouseEntered] = useMouseEnter();
 
-  useEffect(() => {
-    handleAnimations();
-  }, [isMouseEntered]);
-
-  const handleAnimations = () => {
+  const handleAnimations = React.useCallback(() => {
     if (!ref.current) return;
     if (isMouseEntered) {
       ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
     } else {
       ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
     }
-  };
+  }, [isMouseEntered, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
 
-  const Component = as || "div";
+  useEffect(() => {
+    handleAnimations();
+  }, [handleAnimations]);
 
   return (
     <Component

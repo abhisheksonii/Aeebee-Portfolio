@@ -1,3 +1,4 @@
+// components/Education.tsx
 "use client";
 import React from 'react';
 import { CardStack, Card } from "@/components/ui/card-stack";
@@ -23,31 +24,30 @@ const educations: Education[] = [
 
 const educationToCard = (edu: Education): Card => ({
   id: edu.id,
-  name: '', // We'll leave this empty as we don't need it
-  designation: '', // We'll leave this empty as we don't need it
+  name: '',
+  designation: '',
   content: (
-    <div className="flex flex-col h-full justify-between p-4 sm:p-6">
+    <div className="flex flex-col h-full justify-between p-4 md:p-6">
       <div>
-        <p className="text-base sm:text-lg font-bold text-green-400 mb-2">{edu.degree}</p>
-        <p className="text-sm sm:text-base font-medium text-green-300 mb-1">{edu.institution}</p>
-        <p className="text-xs sm:text-sm text-green-200 mb-2">{edu.year}</p>
+        <p className="text-base md:text-lg font-bold text-green-400 mb-2">{edu.degree}</p>
+        <p className="text-sm md:text-base font-medium text-green-300 mb-1">{edu.institution}</p>
+        <p className="text-xs md:text-sm text-green-200 mb-2">{edu.year}</p>
       </div>
-      <p className="text-xs sm:text-sm text-white">{edu.description}</p>
+      <p className="text-xs md:text-sm text-white">{edu.description}</p>
     </div>
   ),
 });
 
 export default function Education() {
   const educationCards = educations.map(educationToCard);
-
   return (
-    <section className="py-10 sm:py-20">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-10 text-center text-green-400">Education</h2>
-      <div className="flex justify-center px-4 sm:px-0">
+    <section className="py-10 md:py-20">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center text-green-400">Education</h2>
+      <div className="flex justify-center px-4 md:px-0">
         <div className="w-full max-w-md">
-          <CardStack 
-            items={educationCards} 
-            offset={10} 
+          <CardStack
+            items={educationCards}
+            offset={10}
             scaleFactor={0.06}
           />
         </div>
