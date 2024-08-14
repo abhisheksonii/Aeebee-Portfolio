@@ -32,8 +32,8 @@ const projects: Project[] = [
 
 export default function Projects() {
   return (
-    <section className="py-10 md:py-20">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center text-green-400">Projects</h2>
+    <section className="py-8 md:py-12">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center text-green-400">Projects</h2>
       <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 md:gap-8 px-4 md:px-0">
         {projects.map((project, index) => (
           <CardContainer key={index} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(50%-2rem)] flex-grow">
@@ -50,7 +50,7 @@ export default function Projects() {
               <CardItem translateZ="60" className="mb-4 flex-grow">
                 <p className="text-sm md:text-base text-green-200">{project.description}</p>
               </CardItem>
-              <CardItem translateZ="100" className="w-full h-32 md:h-48 relative rounded-lg overflow-hidden mb-4">
+              <CardItem translateZ="100" className="w-full h-32 md:h-40 relative rounded-lg overflow-hidden mb-4">
                 <Image
                   src={project.image}
                   alt={`${project.name} preview`}

@@ -27,7 +27,7 @@ const educationToCard = (edu: Education): Card => ({
   name: '',
   designation: '',
   content: (
-    <div className="p-4 md:p-5">
+    <div className="p-4">
       <p className="text-base md:text-lg font-bold text-green-400">{edu.degree}</p>
       <p className="text-sm md:text-base font-medium text-green-300">{edu.institution}</p>
       <p className="text-xs md:text-sm text-green-200">{edu.year}</p>
@@ -39,13 +39,13 @@ const educationToCard = (edu: Education): Card => ({
 export default function Education() {
   const educationCards = educations.map(educationToCard);
   return (
-    <section className="py-10 md:py-20 mb-20">
-      <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center text-green-400">Education</h2>
-      <div className="flex justify-center px-4 md:px-0">
+    <section className="py-8">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center text-green-400">Education</h2>
+      <div className="flex justify-center">
         <div className="w-full max-w-lg">
           <CardStack
             items={educationCards}
-            offset={10}
+            offset={5}
             scaleFactor={0.06}
           />
         </div>
