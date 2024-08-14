@@ -19,7 +19,7 @@ const projects: Project[] = [
     description: "A dynamic portfolio website showcasing my projects and skills, built with Next.js and AI integration.",
     tools: ["Next.js", "React", "Tailwind CSS", "AI Integration"],
     image: "/Avatar.png",
-    liveLink: "https://your-portfolio-url.com"
+    liveLink: "https://abhisheksoni.vercel.app/"
   },
   {
     name: "Data Visualization Dashboard",
