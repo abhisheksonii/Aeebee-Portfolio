@@ -7,6 +7,11 @@ import { cn } from '@/lib/utils';
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = "mailto:work.abhisheksoni@gmail.com";
+  };
+
   return (
     <header className="py-2 md:py-4 backdrop-blur-md sticky top-0 z-50 bg-gray-800/50">
       <div className="container mx-auto px-4">
@@ -16,7 +21,10 @@ export default function Header() {
           </Link>
           <div className="hidden md:flex items-center space-x-6">
             <Link href="/" className="text-green-300 hover:text-green-200 transition-colors">Home</Link>
-            <button className="px-4 py-2 bg-green-500 text-black rounded hover:bg-green-400 transition-colors duration-300">
+            <button
+              onClick={handleContactClick}
+              className="px-4 py-2 bg-green-500 text-black rounded hover:bg-green-400 transition-colors duration-300"
+            >
               Contact Me
             </button>
           </div>
@@ -31,7 +39,10 @@ export default function Header() {
       {mobileMenuOpen && (
         <div className="md:hidden mt-2 pb-4 px-4">
           <Link href="/" className="block py-2 text-green-300 hover:text-green-200 transition-colors">Home</Link>
-          <button className="w-full mt-2 px-4 py-2 bg-green-500 text-black rounded hover:bg-green-400 transition-colors duration-300">
+          <button
+            onClick={handleContactClick}
+            className="w-full mt-2 px-4 py-2 bg-green-500 text-black rounded hover:bg-green-400 transition-colors duration-300"
+          >
             Contact Me
           </button>
         </div>
