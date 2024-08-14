@@ -8,11 +8,10 @@ import React, {
   useContext,
   useRef,
   useEffect,
+  useCallback,
 } from "react";
 
-const MouseEnterContext = createContext<
-  [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
->(undefined);
+const MouseEnterContext = createContext<boolean>(false);
 
 interface CardContainerProps {
   children: React.ReactNode;
@@ -56,7 +55,7 @@ export const CardContainer: React.FC<CardContainerProps> = ({
   };
 
   return (
-    <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
+    <MouseEnterContext.Provider value={isMouseEntered}>
       <div
         className={cn(
           "py-20 flex items-center justify-center",
@@ -127,20 +126,20 @@ export const CardItem: React.FC<CardItemProps> = ({
   rotateZ = 0,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [isMouseEntered] = useMouseEnter();
+  const isMouseEntered = useContext(MouseEnterContext);
 
-  useEffect(() => {
-    handleAnimations();
-  }, [isMouseEntered, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
-
-  const handleAnimations = () => {
+  const handleAnimations = useCallback(() => {
     if (!ref.current) return;
     if (isMouseEntered) {
       ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
     } else {
       ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
     }
-  };
+  }, [isMouseEntered, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
+
+  useEffect(() => {
+    handleAnimations();
+  }, [handleAnimations]);
 
   return (
     <div
@@ -150,12 +149,4 @@ export const CardItem: React.FC<CardItemProps> = ({
       {children}
     </div>
   );
-};
-
-export const useMouseEnter = () => {
-  const context = useContext(MouseEnterContext);
-  if (context === undefined) {
-    throw new Error("useMouseEnter must be used within a MouseEnterProvider");
-  }
-  return context;
 };
