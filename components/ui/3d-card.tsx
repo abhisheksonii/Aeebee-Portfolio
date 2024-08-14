@@ -1,3 +1,4 @@
+// components/ui/3d-card.tsx
 "use client";
 
 import { cn } from "@/lib/utils";
@@ -104,8 +105,7 @@ export const CardBody: React.FC<CardBodyProps> = ({ children, className }) => {
   );
 };
 
-type CardItemProps<T extends React.ElementType> = {
-  as?: T;
+interface CardItemProps {
   children: React.ReactNode;
   className?: string;
   translateX?: number | string;
@@ -114,10 +114,9 @@ type CardItemProps<T extends React.ElementType> = {
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
-} & Omit<React.ComponentPropsWithoutRef<T>, "as" | "children" | "className" | "translateX" | "translateY" | "translateZ" | "rotateX" | "rotateY" | "rotateZ">;
+}
 
-export const CardItem = <T extends React.ElementType = "div">({
-  as,
+export const CardItem: React.FC<CardItemProps> = ({
   children,
   className,
   translateX = 0,
@@ -126,33 +125,30 @@ export const CardItem = <T extends React.ElementType = "div">({
   rotateX = 0,
   rotateY = 0,
   rotateZ = 0,
-  ...rest
-}: CardItemProps<T>) => {
-  const Component = as || "div";
-  const ref = useRef<React.ElementRef<typeof Component>>(null);
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
   const [isMouseEntered] = useMouseEnter();
 
-  const handleAnimations = React.useCallback(() => {
+  useEffect(() => {
+    handleAnimations();
+  }, [isMouseEntered, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
+
+  const handleAnimations = () => {
     if (!ref.current) return;
     if (isMouseEntered) {
       ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
     } else {
       ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
     }
-  }, [isMouseEntered, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
-
-  useEffect(() => {
-    handleAnimations();
-  }, [handleAnimations]);
+  };
 
   return (
-    <Component
+    <div
       ref={ref}
       className={cn("w-fit transition duration-200 ease-linear", className)}
-      {...rest}
     >
       {children}
-    </Component>
+    </div>
   );
 };
 

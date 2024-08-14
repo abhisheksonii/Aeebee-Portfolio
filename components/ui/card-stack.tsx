@@ -1,5 +1,6 @@
+// components/ui/card-stack.tsx
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 let interval: any;
@@ -23,6 +24,7 @@ export const CardStack = ({
   const CARD_OFFSET = offset || 10;
   const SCALE_FACTOR = scaleFactor || 0.06;
   const [cards, setCards] = useState<Card[]>(items);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     startFlipping();
@@ -40,17 +42,17 @@ export const CardStack = ({
   };
 
   return (
-    <div className="relative w-full h-60 sm:h-72 md:h-80">
+    <div ref={containerRef} className="relative w-full" style={{ height: `${items.length * CARD_OFFSET + 200}px` }}>
       {cards.map((card, index) => {
         return (
           <motion.div
             key={card.id}
-            className="absolute inset-0 bg-gray-900 rounded-3xl shadow-xl border border-green-500/30 shadow-black/[0.1] flex flex-col justify-between"
+            className="absolute inset-x-0 top-0 bg-gray-900 rounded-3xl shadow-xl border border-green-500/30 shadow-black/[0.1]"
             style={{
               transformOrigin: "top center",
             }}
             animate={{
-              top: index * -CARD_OFFSET,
+              y: index * CARD_OFFSET,
               scale: 1 - index * SCALE_FACTOR,
               zIndex: cards.length - index,
             }}

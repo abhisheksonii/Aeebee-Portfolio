@@ -34,33 +34,23 @@ export default function Projects() {
   return (
     <section className="py-10 md:py-20">
       <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-10 text-center text-green-400">Projects</h2>
-      <div className="flex flex-wrap justify-center gap-6 md:gap-8 px-4 md:px-0">
+      <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 md:gap-8 px-4 md:px-0">
         {projects.map((project, index) => (
-          <CardContainer key={index} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.33%-1rem)]">
+          <CardContainer key={index} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(50%-2rem)] flex-grow">
             <CardBody className={cn(
-              "bg-gray-900/90 backdrop-blur-sm relative group/card",
+              "bg-gray-900/90 backdrop-blur-sm relative group/card h-full",
               "hover:shadow-2xl hover:shadow-green-500/[0.1]",
               "border-white/[0.2] border",
-              "w-full h-auto rounded-xl p-4 md:p-6",
-              "transition-all duration-300"
+              "w-full rounded-xl p-4 md:p-6",
+              "transition-all duration-300 flex flex-col"
             )}>
-              <CardItem
-                translateZ="50"
-                className="text-xl md:text-2xl font-bold text-green-400 mb-2"
-              >
-                {project.name}
+              <CardItem translateZ="50" className="mb-2">
+                <h3 className="text-xl md:text-2xl font-bold text-green-400">{project.name}</h3>
               </CardItem>
-              <CardItem
-                as="p"
-                translateZ="60"
-                className="text-sm md:text-base text-green-200 mb-4"
-              >
-                {project.description}
+              <CardItem translateZ="60" className="mb-4 flex-grow">
+                <p className="text-sm md:text-base text-green-200">{project.description}</p>
               </CardItem>
-              <CardItem
-                translateZ="100"
-                className="w-full h-32 md:h-48 relative rounded-lg overflow-hidden mb-4"
-              >
+              <CardItem translateZ="100" className="w-full h-32 md:h-48 relative rounded-lg overflow-hidden mb-4">
                 <Image
                   src={project.image}
                   alt={`${project.name} preview`}
@@ -68,10 +58,7 @@ export default function Projects() {
                   className="object-cover group-hover/card:shadow-xl transition-all duration-300"
                 />
               </CardItem>
-              <CardItem
-                translateZ="80"
-                className="flex flex-wrap gap-2 mb-4"
-              >
+              <CardItem translateZ="80" className="flex flex-wrap gap-2 mb-4">
                 {project.tools.map((tool, i) => (
                   <span key={i} className="bg-green-800 px-2 py-1 rounded text-xs text-green-100">
                     {tool}
@@ -79,10 +66,7 @@ export default function Projects() {
                 ))}
               </CardItem>
               {project.liveLink && (
-                <CardItem
-                  translateZ="120"
-                  className="mt-auto"
-                >
+                <CardItem translateZ="120" className="mt-auto">
                   <a
                     href={project.liveLink}
                     target="_blank"
