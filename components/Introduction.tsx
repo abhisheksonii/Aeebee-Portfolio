@@ -34,8 +34,7 @@ export default function Introduction() {
             </CardItem>
             <CardItem translateZ="100" className="text-sm md:text-base text-green-200">
               I&apos;m a software developer with a passion for building innovative solutions.
-              Specializing in rapid prototyping and efficient development, I bring ideas to life
-              quickly and effectively.
+              Specializing in rapid prototyping and efficient development.
             </CardItem>
           </div>
         </CardBody>
